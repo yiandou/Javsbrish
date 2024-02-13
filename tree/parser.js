@@ -34,14 +34,14 @@ module.exports = function parse(input) {
     function unexpected() {
         input.issue("Unexpected token: " + JSON.stringify(input.peek()));
     }
-    function maybeBinary(left, my_prec) { //change this to use mov
+    function maybeBinary(left, my_prec) {
         let tok = isOp();
         if (tok) {
             const his_prec = PRECEDENCE[tok.value];
             if (his_prec > my_prec) {
                 input.next();
                 return maybeBinary({
-                    type     : tok.value == "=" ? "assign" : "binary",
+                    type     : "binary",
                     operator : tok.value,
                     left     : left,
                     right    : maybeBinary(parseIf(), his_prec)
@@ -105,14 +105,31 @@ module.exports = function parse(input) {
         return isPunc("(") ? parseCall(expr) : expr;
     }
     function parseBite() {
-
+        return maybeCall(function() {
+            if (isPunc("(")) {
+                input.next();
+                let exp = parseExpression();
+                skipPunc(")");
+                return exp;
+            }
+            if (isPunc("{")) return parseBlock();
+            if (isKw("if")) return parseIf();
+            if (isKw("true") || isKw("false")) return parseBool();
+            if (isKw("label")) {
+                input.next();
+                return parseLabel();
+            }
+            let tok = input.next();
+            if (tok.type == "var" || tok.type == "num" || tok.type == "str") return tok;
+            unexpected();
+        });
     }
     function parseExpression() {
         return maybeCall(function() {
             return maybeBinary(parseBite(), 0);
         });
     }
-    function parseProg() {
+    function parseTop() {
         let prog = [];
         while (!input.eof()) {
             prog.push(parseExpression());
@@ -120,5 +137,11 @@ module.exports = function parse(input) {
         }
         return { type: "prog", prog: prog };
     }
-    return parseProg();
+    function parseBlock() {
+        let block = delimited("{", "}", ";", parseExpression);
+        if (block.length == 0) return false;
+        if (block.length == 1) return block[0];
+        return { type: "block", block: block };
+    }
+    return parseTop();
 };
