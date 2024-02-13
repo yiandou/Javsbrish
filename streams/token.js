@@ -67,7 +67,7 @@ module.exports = class tokenStream {
             input.next();
         }
         readNext = () => {
-            readWhile(isWhitespace(isWhitespace));
+            readWhile(isWhitespace);
             if (input.eof()) return null;
             let ch = input.peek();
             if (ch === ";") {

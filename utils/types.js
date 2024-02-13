@@ -1,7 +1,7 @@
-const keywords = ["if", "else", "do", ":=", ";", "while", "mov", "true", "false", "cmp", "include", "struct"];
+const keywords = ["if", "else", "do", ":=", ";", "while", "mov", "true", "false", "cmp", "include", "struct", "sys"];
 
 function isKeywords(x) {
-    return keywords.indexOf(x);
+    return keywords.includes(x);
 }
 function isDigit(ch) {
     return /[0-9]/i.test(ch);

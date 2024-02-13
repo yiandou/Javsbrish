@@ -40,3 +40,6 @@
 <property-name> ::= <identifier> | <string-literal> | <computed-property-name>
 <computed-property-name> ::= "[" <expression> "]"
 <property-value> ::= <expression> | <function-declaration>
+
+<compare> ::= "cmp"<letter>[<digit>] <expression> "," <expression> ";"
+#sys to be made?
