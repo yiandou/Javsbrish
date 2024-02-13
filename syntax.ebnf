@@ -1,0 +1,42 @@
+<program>      ::= <statement-list>
+
+<letter>        ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+<digit>         ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+<special-character> ::= "!" | "(" | ")" | "{" | "}" | "[" | "]" | "," | ";" | ":" | "=" | "<" | ">" | "+" | "-" | "*" | "/" | "&&" | "||"
+<type> ::= "string" | "int" | "float" | "double" | "ptr" | "hw" |
+<identifier>    ::= <letter> | <identifier> <letter> | <identifier> <digit>
+<statement-list> ::= <statement> | <statement> <statement-list>
+<statement>     ::= <variable-declaration> | <assignment> | <if-statement> | <while-loop> | <expression> ";" | <function-declaration> | <for-loop>
+<block> ::= "{" <statement-list> "}"
+
+<numeric-literal> ::= <digit> {<digit>}
+<string-literal> ::= '"' {<character>} '"'
+<boolean-literal> ::= "true" | "false"
+<character> ::= <letter> | <digit> | <special-character>
+
+<expression>      ::= <logical-expression>
+<logical-expression> ::= <equality-expression> {("&&" | "||") <equality-expression>}
+<equality-expression> ::= <relational-expression> {("==" | "!=") <relational-expression>}
+<relational-expression> ::= <additive-expression> {("<" | ">" | "<=" | ">=") <additive-expression>}
+<additive-expression> ::= <multiplicative-expression> {("+" | "-") <multiplicative-expression>}
+<multiplicative-expression> ::= <unary-expression> {("*" | "/" | "%") <unary-expression>}
+<unary-expression> ::= ["+" | "-"] <primary-expression>
+<primary-expression> ::= <identifier> | <literal> | "(" <expression> ")" | <struct>
+
+<variable-declaration> ::= "mov" <identifier>["<" <type> ">"] "," <expression> ";"
+<function-declaration> ::= <identifier> "(" <parameter-list> ")" ":=" <block> ";"
+<assignment> ::= "mov" <identifier>["<" <type> ">"] "," <expression> ";"
+<parameter-list> ::= <identifier> { "," <identifier> }
+<function-call> ::= <identifier> "(" <argument-list> ")" ";"
+<argument-list> ::= <expression> { "," <expression> }
+<if-statement>  ::= "if" "(" <expression> ")" <block> ";"
+                    [ "else" <block> ";"]
+<for-loop>    ::= "for" "(" <assignment> "," <expression> "," <assignment> ")" <block> ";"
+<import> ::= "include" <string-literal> ";"
+
+<struct> ::= "struct" <identifier> "{" <property-list> "}" ";"
+<property-list> ::= <property> {"," <property>}
+<property> ::= <property-name> ":" <property-value>
+<property-name> ::= <identifier> | <string-literal> | <computed-property-name>
+<computed-property-name> ::= "[" <expression> "]"
+<property-value> ::= <expression> | <function-declaration>

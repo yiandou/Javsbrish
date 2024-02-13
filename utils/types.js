@@ -1,4 +1,4 @@
-const keywords = ["if", "else", "do", ":=", ";", "while", "mov", "true", "false", "cmp"];
+const keywords = ["if", "else", "do", ":=", ";", "while", "mov", "true", "false", "cmp", "include", "struct"];
 
 function isKeywords(x) {
     return keywords.indexOf(x);
