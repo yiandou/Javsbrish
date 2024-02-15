@@ -41,5 +41,7 @@
 <computed-property-name> ::= "[" <expression> "]"
 <property-value> ::= <expression> | <function-declaration>
 
-<compare> ::= "cmp"<letter>[<digit>] <expression> "," <expression> ";"
-#sys to be made?
+#This will be one of the defining features of the language, 
+#the ability to use a more low-level communication in a high-level-like language
+<syscall> ::= "syscall" "(" <argument-list> ")" ";"
+#<compare> ::= "cmp"<letter>[<digit>] <expression> "," <expression> ";"

@@ -89,6 +89,13 @@ module.exports = function parse(input) {
         }
         return ret;
     }
+    function parseSyscall() {
+        skipKw("syscall");
+        return {
+            type: "syscall",
+            args: delimited("(", ")", ",", parseExpression)
+        };
+    }
     function parseLabel() {
         let label = input.next();
         if (label.type != "var") input.issue("Expecting label");
@@ -115,7 +122,8 @@ module.exports = function parse(input) {
             if (isPunc("{")) return parseBlock();
             if (isKw("if")) return parseIf();
             if (isKw("true") || isKw("false")) return parseBool();
-            if (isKw("label")) {
+            if (isKw("syscall")) return parseSyscall();
+            if (isKw(":=")) {
                 input.next();
                 return parseLabel();
             }

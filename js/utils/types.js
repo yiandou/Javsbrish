@@ -1,4 +1,4 @@
-const keywords = ["if", "else", "do", ":=", ";", "while", "mov", "true", "false", "cmp", "include", "struct", "sys"];
+const keywords = ["if", "else", "do", ":=", ";", "while", "mov", "true", "false", "cmp", "include", "struct", "syscall"];
 
 function isKeywords(x) {
     return keywords.includes(x);
