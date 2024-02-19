@@ -1,13 +1,13 @@
-<program>      ::= <statement-list>
+<program>      ::= <bite-list>
 
 <letter>        ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
 <digit>         ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 <special-character> ::= "!" | "(" | ")" | "{" | "}" | "[" | "]" | "," | ";" | ":" | "=" | "<" | ">" | "+" | "-" | "*" | "/" | "&&" | "||"
 <type> ::= "string" | "int" | "float" | "double" | "ptr" | "hw" |
 <identifier>    ::= <letter> | <identifier> <letter> | <identifier> <digit>
-<statement-list> ::= <statement> | <statement> <statement-list>
-<statement>     ::= <variable-declaration> | <assignment> | <if-statement> | <while-loop> | <expression> ";" | <function-declaration> | <for-loop>
-<block> ::= "{" <statement-list> "}"
+<bite-list> ::= <bite> | <bite> <bite-list>
+<bite>     ::= <variable-declaration> | <assignment> | <if-bite> | <while-loop> | <expression> ";" | <label-declaration> | <for-loop>
+<block> ::= "{" <bite-list> "}"
 
 <numeric-literal> ::= <digit> {<digit>}
 <string-literal> ::= '"' {<character>} '"'
@@ -24,12 +24,12 @@
 <primary-expression> ::= <identifier> | <literal> | "(" <expression> ")" | <struct>
 
 <variable-declaration> ::= "mov" <identifier>["<" <type> ">"] "," <expression> ";"
-<function-declaration> ::= <identifier> "(" <parameter-list> ")" ":=" <block> ";"
+<label-declaration> ::= <identifier> "(" <parameter-list> ")" ":=" <block> ";"
 <assignment> ::= "mov" <identifier>["<" <type> ">"] "," <expression> ";"
 <parameter-list> ::= <identifier> { "," <identifier> }
-<function-call> ::= <identifier> "(" <argument-list> ")" ";"
+<label-call> ::= <identifier> "(" <argument-list> ")" ";"
 <argument-list> ::= <expression> { "," <expression> }
-<if-statement>  ::= "if" "(" <expression> ")" <block> ";"
+<if-bite>  ::= "if" "(" <expression> ")" <block> ";"
                     [ "else" <block> ";"]
 <for-loop>    ::= "for" "(" <assignment> "," <expression> "," <assignment> ")" <block> ";"
 <import> ::= "include" <string-literal> ";"
@@ -39,9 +39,10 @@
 <property> ::= <property-name> ":" <property-value>
 <property-name> ::= <identifier> | <string-literal> | <computed-property-name>
 <computed-property-name> ::= "[" <expression> "]"
-<property-value> ::= <expression> | <function-declaration>
+<property-value> ::= <expression> | <label-declaration>
 
 #This will be one of the defining features of the language, 
 #the ability to use a more low-level communication in a high-level-like language
 <syscall> ::= "syscall" "(" <argument-list> ")" ";"
+<hw> ::= "hw" <identifier> <string> "(" <argument-list> ")" ";"
 #<compare> ::= "cmp"<letter>[<digit>] <expression> "," <expression> ";"
