@@ -3,7 +3,7 @@
 <letter>        ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
 <digit>         ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 <special-character> ::= "!" | "(" | ")" | "{" | "}" | "[" | "]" | "," | ";" | ":" | "=" | "<" | ">" | "+" | "-" | "*" | "/" | "&&" | "||"
-<type> ::= "string" | "int" | "float" | "double" | "ptr" | "hw" |
+<type> ::= "string" | "int" | "float" | "double" | "ptr" | "hardware" |
 <identifier>    ::= <letter> | <identifier> <letter> | <identifier> <digit>
 <bite-list> ::= <bite> | <bite> <bite-list>
 <bite>     ::= <variable-declaration> | <assignment> | <if-bite> | <while-loop> | <expression> ";" | <label-declaration> | <for-loop>
@@ -32,13 +32,13 @@
 <if-bite>  ::= "if" "(" <expression> ")" <block> ";"
                     [ "else" <block> ";"]
 <for-loop>    ::= "for" "(" <assignment> "," <expression> "," <assignment> ")" <block> ";"
-<import> ::= "include" <string-literal> ";"
+<import> ::= "import" <string-literal> ";"
 
 <struct> ::= "struct" <identifier> "{" <property-list> "}" ";"
 <property-list> ::= <property> {"," <property>}
 <property> ::= <property-name> ":" <property-value>
 <property-name> ::= <identifier> | <string-literal> | <computed-property-name>
-<computed-property-name> ::= "[" <expression> "]"
+<computed-property-name> ::= <expression>
 <property-value> ::= <expression> | <label-declaration>
 
 #This will be one of the defining features of the language, 

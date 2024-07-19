@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "readline.h": "c",
-        "mpc.h": "c"
+        "mpc.h": "c",
+        "parse.h": "c",
+        "history.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c"
     }
 }
